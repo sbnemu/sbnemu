@@ -10,10 +10,6 @@ public class AddressRange implements Comparable<AddressRange> {
 		this.endAddress = endAddress;
 	}
 
-	public AddressRange(long address) {
-		this(address, address);
-	}
-	
 	public long getBaseAddress() {
 		return baseAddress;
 	}
@@ -22,6 +18,10 @@ public class AddressRange implements Comparable<AddressRange> {
 		return endAddress;
 	}
 
+	public long getExtent() {
+		return endAddress - baseAddress;
+	}
+	
 	public boolean contains(long address) {
 		return baseAddress <= address && address < endAddress;
 	}

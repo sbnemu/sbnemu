@@ -30,7 +30,7 @@ public class DefaultBus extends AbstractDevice implements Bus, AddressListener {
 	}
 	
 	public long get(long address) {
-		AddressRange q = new AddressRange(address);
+		AddressRange q = new AddressRange(address, address + 1);
 		Device d = devices.get(q);
 		if(d != null)
 			return d.get(address);
@@ -39,7 +39,7 @@ public class DefaultBus extends AbstractDevice implements Bus, AddressListener {
 		throw new IllegalAddressException();
 	}
 	public void set(long address, long value) {
-		AddressRange q = new AddressRange(address);
+		AddressRange q = new AddressRange(address, address + 1);
 		Device d = devices.get(q);
 		if(d != null)
 			d.set(address, value);
