@@ -17,6 +17,10 @@ public class ArrayDevice extends AbstractDevice {
 	public ArrayDevice(int size) {
 		data = new long[size];
 	}
+	
+	public ArrayDevice(long[] data) {
+		this.data = data;
+	}
 
 	public void setAddresses(AddressRange... addresses) {
 		if(addresses.length != 1)
