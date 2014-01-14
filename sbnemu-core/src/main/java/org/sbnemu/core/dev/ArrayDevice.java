@@ -10,6 +10,10 @@ public class ArrayDevice extends AbstractDevice {
 
 	protected long[] data;
 	
+	public ArrayDevice() {
+		this(0);
+	}
+	
 	public ArrayDevice(int size) {
 		data = new long[size];
 	}

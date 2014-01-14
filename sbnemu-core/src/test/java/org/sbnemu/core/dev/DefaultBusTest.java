@@ -23,7 +23,7 @@ public class DefaultBusTest {
 	
 	@Test
 	public void testAddDevice() {
-		Device d = new ArrayDevice(256);
+		Device d = new ArrayDevice();
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 		
@@ -31,7 +31,7 @@ public class DefaultBusTest {
 				new AddressRange[] {new AddressRange(0, 256)},
 				bus.getAddresses());
 		
-		d = new ArrayDevice(256);
+		d = new ArrayDevice();
 		d.setAddresses(new AddressRange(1024, 1280));
 		bus.addDevice(d);
 		
@@ -47,7 +47,7 @@ public class DefaultBusTest {
 	
 	@Test
 	public void testValidAddress() {
-		Device d = new ArrayDevice(256);
+		Device d = new ArrayDevice();
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 		
@@ -62,18 +62,18 @@ public class DefaultBusTest {
 	
 	@Test
 	public void testInvalidAddress() {
-		Device d = new ArrayDevice(256);
+		Device d = new ArrayDevice();
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 	}
 	
 	@Test
 	public void testOverlap() {
-		Device d = new ArrayDevice(256);
+		Device d = new ArrayDevice();
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 		
-		d = new ArrayDevice(256);
+		d = new ArrayDevice();
 		d.setAddresses(new AddressRange(128, 384));
 		try {
 			bus.addDevice(d);
@@ -95,7 +95,7 @@ public class DefaultBusTest {
 	
 	@Test
 	public void testDefaultMemory() {
-		Device d = new ArrayDevice(256);
+		Device d = new ArrayDevice();
 		d.setAddresses(new AddressRange(-128, 128));
 		bus.setDefaultMemory(d);
 		
@@ -106,7 +106,7 @@ public class DefaultBusTest {
 	
 	@Test
 	public void testModifyDevice() {
-		Device d = new ArrayDevice(256);
+		Device d = new ArrayDevice();
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 		
