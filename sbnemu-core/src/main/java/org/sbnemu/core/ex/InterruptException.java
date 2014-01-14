@@ -1,7 +1,16 @@
 package org.sbnemu.core.ex;
 
+/**
+ * Exception thrown to cause a user-defined interrupt to be issued.
+ * Interrupts have a one-byte ID.
+ * @author robin
+ *
+ */
 public class InterruptException extends RuntimeException {
 
+	/**
+	 * The ID of the interrupt
+	 */
 	protected byte interruptId;
 	
 	public InterruptException(byte interruptId) {
@@ -23,12 +32,11 @@ public class InterruptException extends RuntimeException {
 		this.interruptId = interruptId;
 	}
 
+	/**
+	 * Return the ID of this {@link InterruptException}
+	 * @return
+	 */
 	public byte getInterruptId() {
 		return interruptId;
 	}
-
-	public void setInterruptId(byte interruptId) {
-		this.interruptId = interruptId;
-	}
-
 }

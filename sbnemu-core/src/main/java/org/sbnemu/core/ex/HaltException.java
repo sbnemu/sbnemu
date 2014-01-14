@@ -1,5 +1,10 @@
 package org.sbnemu.core.ex;
 
+/**
+ * Exception thrown when a device wishes the virtual machine to halt
+ * @author robin
+ *
+ */
 public class HaltException extends RuntimeException {
 
 	public HaltException() {
