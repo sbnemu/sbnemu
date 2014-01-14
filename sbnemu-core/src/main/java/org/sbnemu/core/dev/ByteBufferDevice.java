@@ -12,6 +12,12 @@ public class ByteBufferDevice extends AbstractDevice {
 	protected int position;
 	protected int limit;
 	
+	// used only for deserialization
+	@Deprecated
+	public ByteBufferDevice() {
+		
+	}
+	
 	public ByteBufferDevice(ByteBuffer buf) {
 		this(buf, buf.position(), buf.limit());
 	}
@@ -27,6 +33,11 @@ public class ByteBufferDevice extends AbstractDevice {
 			throw new IllegalAddressException();
 		if(addresses[0].getExtent() > buf.limit() - buf.position())
 			throw new IllegalAddressException();
+		if(buf == null) {
+			buf = ByteBuffer.allocate((int)addresses[0].getExtent());
+			position = buf.position();
+			limit = buf.limit();
+		}
 		super.setAddresses(addresses);
 	}
 	
