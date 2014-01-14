@@ -30,11 +30,11 @@ public class ByteBufferDevice extends AbstractDevice {
 		super.setAddresses(addresses);
 	}
 	
-	public long getBaseAddress() {
+	protected long getBaseAddress() {
 		return getAddresses()[0].getBaseAddress();
 	}
 	
-	public long getEndAddress() {
+	protected long getEndAddress() {
 		return getAddresses()[0].getEndAddress();
 	}
 	
