@@ -37,5 +37,13 @@ public class DefaultCPU implements CPU {
 		this.bus.addDevice(bus);
 	}
 
+	public long getPc() {
+		return pc;
+	}
+
+	public void setPc(long pc) {
+		this.pc = pc;
+	}
+
 
 }
