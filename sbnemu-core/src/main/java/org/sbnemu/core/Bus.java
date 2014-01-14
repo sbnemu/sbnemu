@@ -19,11 +19,29 @@ public interface Bus extends Device {
 	 */
 	public void removeDevice(Device device);
 	
+	/**
+	 * Return all the devices on this bus.  Is not recurasive, so
+	 * if a bus is attached to a bus, the secondary bus's devices will
+	 * not be listed.
+	 * @return
+	 */
 	public Device[] getDevices();
 	
+	/**
+	 * Set the devices on this bus
+	 * @param devices The new set of devices for the bus
+	 */
 	public void setDevices(Device... devices);
 	
+	/**
+	 * Returns the default {@link Memory} to be used if no device handles a particular address
+	 * @return The default {@link Memory}
+	 */
 	public Memory getDefaultMemory();
 	
+	/**
+	 * Sets the default {@link Memory} to be used if no device handles a particular address
+	 * @param defaultMemory The new default {@link Memory}
+	 */
 	public void setDefaultMemory(Memory defaultMemory);
 }
