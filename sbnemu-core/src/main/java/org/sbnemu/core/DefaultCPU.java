@@ -2,6 +2,7 @@ package org.sbnemu.core;
 
 import org.sbnemu.core.dev.DefaultBus;
 import org.sbnemu.core.dev.ExceptionVectorTable;
+import org.sbnemu.core.ex.HaltException;
 
 public class DefaultCPU implements CPU {
 	
@@ -21,6 +22,8 @@ public class DefaultCPU implements CPU {
 				pc = c;
 			else
 				pc += 3;
+		} catch(HaltException halt) {
+			throw halt;
 		} catch(RuntimeException re) {
 			pc = exceptionVectorTable.get(re);
 		}
