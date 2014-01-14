@@ -10,9 +10,21 @@ import org.sbnemu.core.AddressRange;
 import org.sbnemu.core.Device;
 import org.sbnemu.core.ex.IllegalAddressException;
 
+/**
+ * Abstract implementation of a {@link Device}.  Provides support for 
+ * address ranges get/set and address listener add/remove.
+ * @author robin
+ *
+ */
 public abstract class AbstractDevice implements Device {
 	
+	/**
+	 * Listener list for the address listeners
+	 */
 	private EventListenerList listeners = new EventListenerList();
+	/**
+	 * The current address list
+	 */
 	private AddressRange[] addresses = new AddressRange[0];
 	
 	public AddressRange[] getAddresses() {
@@ -33,6 +45,12 @@ public abstract class AbstractDevice implements Device {
 		listeners.remove(AddressListener.class, l);
 	}
 
+	/**
+	 * Call {@link AddressListener#addressesChanged(AddressEvent)} on all
+	 * address listeners for this {@link Device}
+	 * @param oldAddresses
+	 * @param newAddresses
+	 */
 	protected void fireAddressesChanged(AddressRange[] oldAddresses, AddressRange[] newAddresses) {
 		Object[] ll = listeners.getListenerList();
 		AddressEvent e = null;
@@ -45,6 +63,11 @@ public abstract class AbstractDevice implements Device {
 		}
 	}
 	
+	/**
+	 * Check if an address is in one of the valid ranges for this 
+	 * device.  Throws {@link IllegalAddressException} if not.
+	 * @param address
+	 */
 	protected void validateAddress(long address) {
 		for(AddressRange r : addresses) {
 			if(r.contains(address))
