@@ -1,5 +1,7 @@
 package org.sbnemu.core.dev;
 
+import java.util.Arrays;
+
 import org.sbnemu.core.AddressRange;
 import org.sbnemu.core.CPU;
 import org.sbnemu.core.ex.IllegalAddressException;
@@ -22,18 +24,23 @@ public class ExceptionVectorTable extends ArrayDevice {
 	@SuppressWarnings("unchecked")
 	private static final Class<? extends Throwable>[] types = new Class[] {
 		null, // position zero is any unknown exception
+		NullPointerException.class,
 		UnsupportedOperationException.class,
 		IllegalAddressException.class,
 		IllegalDataException.class,
 		InterruptException.class // must be the last entry
 	};
 	
+	public static Class<? extends Throwable>[] getTypes() {
+		return Arrays.copyOf(types, types.length);
+	}
+	
 	public ExceptionVectorTable() {
 		super(types.length + 255);
 		setAddresses(new AddressRange(-data.length, 0));
 	}
-
-	public long get(Throwable thrown) {
+	
+	public long getAddress(Throwable thrown) {
 		int offset = -1; // the offset for unknown exception types
 		for(int i = 1; i < types.length; i++) { // skip the null in the types array
 			if(types[i].isAssignableFrom(thrown.getClass()))
@@ -44,6 +51,10 @@ public class ExceptionVectorTable extends ArrayDevice {
 		if(thrown instanceof InterruptException)
 			offset -= 0xff & (int)(((InterruptException) thrown).getInterruptId());
 		// Return the address stored in the table
-		return get(getEndAddress() + offset);
+		return getEndAddress() + offset;
+	}
+
+	public long get(Throwable thrown) {
+		return get(getAddress(thrown));
 	}
 }

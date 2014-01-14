@@ -12,8 +12,8 @@ import org.sbnemu.core.ex.IllegalAddressException;
 
 public abstract class AbstractDevice implements Device {
 	
-	private EventListenerList listeners;
-	private AddressRange[] addresses;
+	private EventListenerList listeners = new EventListenerList();
+	private AddressRange[] addresses = new AddressRange[0];
 	
 	public AddressRange[] getAddresses() {
 		return Arrays.copyOf(addresses, addresses.length);
