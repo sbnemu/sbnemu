@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>../sbnemu-core</module>
+  	<module>../sbnemu-configurator</module>
   </modules>
 </project>

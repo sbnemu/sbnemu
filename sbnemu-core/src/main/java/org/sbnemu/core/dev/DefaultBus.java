@@ -70,6 +70,17 @@ public class DefaultBus extends AbstractDevice implements Bus, AddressListener {
 		super.setAddresses(devices.keySet().toArray(new AddressRange[0]));
 		device.removeAddressListener(this);
 	}
+	
+	public Device[] getDevices() {
+		return new HashSet<Device>(devices.values()).toArray(new Device[0]);
+	}
+	 
+	public void setDevices(Device... devices) {
+		this.devices.clear();
+		for(Device d : devices)
+			addDevice(d);
+	}
+	
 	public Memory getDefaultMemory() {
 		return defaultMemory;
 	}

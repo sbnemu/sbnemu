@@ -19,6 +19,10 @@ public interface Bus extends Device {
 	 */
 	public void removeDevice(Device device);
 	
+	public Device[] getDevices();
+	
+	public void setDevices(Device... devices);
+	
 	public Memory getDefaultMemory();
 	
 	public void setDefaultMemory(Memory defaultMemory);

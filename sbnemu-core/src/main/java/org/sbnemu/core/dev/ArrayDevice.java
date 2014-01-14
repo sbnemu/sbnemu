@@ -29,11 +29,11 @@ public class ArrayDevice extends AbstractDevice {
 		data = Arrays.copyOf(data, (int)(getEndAddress() - getBaseAddress()));
 	}
 	
-	public long getBaseAddress() {
+	protected long getBaseAddress() {
 		return getAddresses()[0].getBaseAddress();
 	}
 	
-	public long getEndAddress() {
+	protected long getEndAddress() {
 		return getAddresses()[0].getEndAddress();
 	}
 	

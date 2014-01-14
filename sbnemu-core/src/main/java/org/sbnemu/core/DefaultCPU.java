@@ -31,10 +31,11 @@ public class DefaultCPU implements CPU {
 	}
 
 	public void setBus(Bus bus) {
-		this.bus = new DefaultBus();
-		this.exceptionVectorTable = new ExceptionVectorTable();
-		this.bus.addDevice(exceptionVectorTable);;
-		this.bus.addDevice(bus);
+		this.bus.removeDevice(exceptionVectorTable);
+		
+		exceptionVectorTable = new ExceptionVectorTable();
+		bus.addDevice(exceptionVectorTable);;
+		this.bus = bus;
 	}
 
 	public long getPc() {
