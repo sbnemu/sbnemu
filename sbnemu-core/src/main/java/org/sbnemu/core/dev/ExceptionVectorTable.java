@@ -31,15 +31,30 @@ public class ExceptionVectorTable extends ArrayDevice {
 		InterruptException.class // must be the last entry
 	};
 	
+	/**
+	 * Return a defensive copy of the known exception classes
+	 * @return
+	 */
 	public static Class<? extends Throwable>[] getTypes() {
 		return Arrays.copyOf(types, types.length);
 	}
 	
+	/**
+	 * Create a new, blank, {@link ExceptionVectorTable}
+	 */
 	public ExceptionVectorTable() {
 		super(types.length + 255);
 		setAddresses(new AddressRange(-data.length, 0));
 	}
 	
+	/**
+	 * Return the address of the jump address specified in this {@link ExceptionVectorTable}
+	 * for the argument {@link Throwable}.
+	 * @param thrown
+	 * @return
+	 * 
+	 * @see #get(Throwable)
+	 */
 	public long getAddress(Throwable thrown) {
 		int offset = -1; // the offset for unknown exception types
 		for(int i = 1; i < types.length; i++) { // skip the null in the types array
@@ -54,6 +69,14 @@ public class ExceptionVectorTable extends ArrayDevice {
 		return getEndAddress() + offset;
 	}
 
+	/**
+	 * Return the jump address specified in this {@link ExceptionVectorTable} for
+	 * the argument {@link Throwable}
+	 * @param thrown
+	 * @return
+	 * 
+	 * @see #getAddress(Throwable)
+	 */
 	public long get(Throwable thrown) {
 		return get(getAddress(thrown));
 	}
