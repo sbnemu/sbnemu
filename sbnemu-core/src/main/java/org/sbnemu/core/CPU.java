@@ -1,9 +1,11 @@
 package org.sbnemu.core;
 
+import org.sbnemu.core.dev.ExceptionVectorTable;
+
 public interface CPU {
 	public void tick();
 	
-	public void addDevice(Device device);
-	public void removeDevice(Device device);
+	public Memory getMemory();
+	public void setMemory(Memory memory);
 }
 

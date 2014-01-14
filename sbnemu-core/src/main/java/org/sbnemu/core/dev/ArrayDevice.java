@@ -1,7 +1,10 @@
 package org.sbnemu.core.dev;
 
+import java.util.Arrays;
+
+import org.sbnemu.core.AddressRange;
 import org.sbnemu.core.Device;
-import org.sbnemu.core.IllegalAddressException;
+import org.sbnemu.core.ex.IllegalAddressException;
 
 public class ArrayDevice implements Device {
 
@@ -10,17 +13,28 @@ public class ArrayDevice implements Device {
 	
 	protected long[] data;
 	
+	public ArrayDevice(int size) {
+		data = new long[size];
+	}
+
+	public AddressRange[] getAddresses() {
+		return new AddressRange[] { new AddressRange(baseAddress, endAddress) };
+	}
+	
+	public void setAddresses(AddressRange... addresses) {
+		if(addresses.length != 1)
+			throw new IllegalAddressException();
+		baseAddress = addresses[0].getBaseAddress();
+		endAddress = addresses[0].getEndAddress();
+		data = Arrays.copyOf(data, (int)(endAddress - baseAddress));
+	}
+	
 	public long getBaseAddress() {
 		return baseAddress;
 	}
-	public void setBaseAddress(long baseAddress) {
-		this.baseAddress = baseAddress;
-	}
+	
 	public long getEndAddress() {
 		return endAddress;
-	}
-	public void setEndAddress(long endAddress) {
-		this.endAddress = endAddress;
 	}
 	
 	public long get(long address) {
