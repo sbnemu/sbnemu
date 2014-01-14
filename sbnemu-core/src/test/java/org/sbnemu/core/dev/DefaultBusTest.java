@@ -103,4 +103,16 @@ public class DefaultBusTest {
 		bus.set(0, 123);
 		Assert.assertEquals(123, bus.get(0));
 	}
+	
+	@Test
+	public void testModifyDevice() {
+		Device d = new ArrayDevice(256);
+		d.setAddresses(new AddressRange(0, 256));
+		bus.addDevice(d);
+		
+		d.setAddresses(new AddressRange(256, 512));
+		Assert.assertArrayEquals(
+				new AddressRange[] {new AddressRange(256, 512)},
+				bus.getAddresses());
+	}
 }
