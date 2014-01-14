@@ -22,6 +22,7 @@ public class ExceptionVectorTable extends ArrayDevice {
 	@SuppressWarnings("unchecked")
 	private static final Class<? extends Throwable>[] types = new Class[] {
 		null, // position zero is any unknown exception
+		UnsupportedOperationException.class,
 		IllegalAddressException.class,
 		IllegalDataException.class,
 		InterruptException.class // must be the last entry

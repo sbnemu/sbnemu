@@ -6,47 +6,37 @@ import org.sbnemu.core.AddressRange;
 import org.sbnemu.core.Device;
 import org.sbnemu.core.ex.IllegalAddressException;
 
-public class ArrayDevice implements Device {
+public class ArrayDevice extends AbstractDevice {
 
-	protected long baseAddress;
-	protected long endAddress;
-	
 	protected long[] data;
 	
 	public ArrayDevice(int size) {
 		data = new long[size];
 	}
 
-	public AddressRange[] getAddresses() {
-		return new AddressRange[] { new AddressRange(baseAddress, endAddress) };
-	}
-	
 	public void setAddresses(AddressRange... addresses) {
 		if(addresses.length != 1)
 			throw new IllegalAddressException();
-		baseAddress = addresses[0].getBaseAddress();
-		endAddress = addresses[0].getEndAddress();
-		data = Arrays.copyOf(data, (int)(endAddress - baseAddress));
+		super.setAddresses(addresses);
+		data = Arrays.copyOf(data, (int)(getEndAddress() - getBaseAddress()));
 	}
 	
 	public long getBaseAddress() {
-		return baseAddress;
+		return getAddresses()[0].getBaseAddress();
 	}
 	
 	public long getEndAddress() {
-		return endAddress;
+		return getAddresses()[0].getEndAddress();
 	}
 	
 	public long get(long address) {
-		if(address < baseAddress || address >= endAddress)
-			throw new IllegalAddressException();
-		return data[(int)(address - baseAddress)];
+		validateAddress(address);
+		return data[(int)(address - getBaseAddress())];
 	}
 	
 	public void set(long address, long value) {
-		if(address < baseAddress || address >= endAddress)
-			throw new IllegalAddressException();
-		data[(int)(address - baseAddress)] = value;
+		validateAddress(address);;
+		data[(int)(address - getBaseAddress())] = value;
 	}
 	
 }

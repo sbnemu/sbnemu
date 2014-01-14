@@ -8,19 +8,33 @@ public class DefaultCPU implements CPU {
 	protected Bus bus = new DefaultBus();;
 	protected ExceptionVectorTable exceptionVectorTable = new ExceptionVectorTable();;
 
+	protected long pc;
+	
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		try {
+			long a = bus.get(pc);
+			long b = bus.get(pc + 1);
+			long c = bus.get(pc + 2);
+			long s = bus.get(a) - bus.get(b);
+			bus.set(a, s);
+			if(s < 0)
+				pc = c;
+			else
+				pc += 3;
+		} catch(RuntimeException re) {
+			pc = exceptionVectorTable.get(re);
+		}
 	}
 
-	public Memory getMemory() {
+	public Bus getBus() {
 		return bus;
 	}
 
-	public void setMemory(Memory memory) {
-		bus = new DefaultBus();
-		bus.addDevice(exceptionVectorTable);;
-		bus.setDefaultMemory(memory);
+	public void setBus(Bus bus) {
+		this.bus = new DefaultBus();
+		this.exceptionVectorTable = new ExceptionVectorTable();
+		this.bus.addDevice(exceptionVectorTable);;
+		this.bus.addDevice(bus);
 	}
 
 

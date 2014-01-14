@@ -5,7 +5,7 @@ import org.sbnemu.core.dev.ExceptionVectorTable;
 public interface CPU {
 	public void tick();
 	
-	public Memory getMemory();
-	public void setMemory(Memory memory);
+	public Bus getBus();
+	public void setBus(Bus bus);
 }
 

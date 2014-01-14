@@ -7,7 +7,7 @@ import org.sbnemu.core.ex.IllegalAddressException;
  * @author robin
  *
  */
-public interface Bus extends Memory {
+public interface Bus extends Device {
 	/**
 	 * Add a {@link Device} to this {@link Bus}
 	 * @param device The device to add
