@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
-@JsonTypeInfo(use=Id.MINIMAL_CLASS, include=As.PROPERTY, property="class")
+@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="class")
 @JsonIgnoreProperties("addresses")
 public class BusMixin extends DeviceMixin {
 	@JsonProperty("defaultMemory")
