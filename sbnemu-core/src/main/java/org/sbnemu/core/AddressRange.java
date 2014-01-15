@@ -106,5 +106,10 @@ public class AddressRange implements Comparable<AddressRange> {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return "<" + baseAddress + ":" + endAddress + ">";
+	}
 
 }

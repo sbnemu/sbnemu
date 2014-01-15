@@ -3,6 +3,7 @@ package org.sbnemu.conf;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.sbnemu.core.AddressRange;
 import org.sbnemu.core.Bus;
@@ -18,6 +19,7 @@ public class BusConfiguratorTest {
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 		
+		System.out.println(bus);
 		new BusConfigurator().generate(System.out, bus);
 	}
 	
@@ -29,9 +31,15 @@ public class BusConfiguratorTest {
 		d.setAddresses(new AddressRange(0, 256));
 		bus.addDevice(d);
 		
+		String exp = bus.toString();
+		
 		new BusConfigurator().generate(bout, bus);
 		
 		ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
-		new BusConfigurator().configurate(bin);
+		bus = new BusConfigurator().configurate(bin);
+		
+		String act = bus.toString();
+		
+		Assert.assertEquals(exp, act);
 	}
 }

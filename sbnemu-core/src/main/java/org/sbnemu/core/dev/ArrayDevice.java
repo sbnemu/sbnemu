@@ -81,4 +81,8 @@ public class ArrayDevice extends AbstractDevice {
 		data[(int)(address - getBaseAddress())] = value;
 	}
 	
+	@Override
+	protected String toStringData() {
+		return ",size:" + data.length;
+	}
 }

@@ -76,4 +76,12 @@ public abstract class AbstractDevice implements Device {
 		throw new IllegalAddressException();
 	}
 	
+	protected abstract String toStringData();
+	
+	@Override
+	public String toString() {
+		return "{" + getClass().getSimpleName() 
+				+ ":" + Arrays.toString(addresses)
+				+ toStringData() + "}";
+	}
 }

@@ -141,4 +141,8 @@ public class DefaultBus extends AbstractDevice implements Bus, AddressListener {
 		remapDevices();
 	}
 	
+	@Override
+	protected String toStringData() {
+		return ",devices:" + Arrays.toString(getDevices());
+	}
 }

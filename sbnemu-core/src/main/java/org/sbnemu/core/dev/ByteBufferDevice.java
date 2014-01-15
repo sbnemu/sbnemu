@@ -76,4 +76,9 @@ public class ByteBufferDevice extends AbstractDevice {
 		buf.put(buf.position() + (int)(address - getBaseAddress()), (byte) value);
 	}
 
+	@Override
+	protected String toStringData() {
+		return ",size:" + (buf.limit() - buf.position());
+	}
+	
 }
