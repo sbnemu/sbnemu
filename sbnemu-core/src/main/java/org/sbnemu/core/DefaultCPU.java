@@ -66,5 +66,10 @@ public class DefaultCPU implements CPU {
 		this.pc = pc;
 	}
 
-
+	@Override
+	public String toString() {
+		return "{" + getClass().getSimpleName() +
+				":" + pc +
+				",devices:" + bus + "}";
+	}
 }

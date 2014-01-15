@@ -38,4 +38,11 @@ public class DefaultCPUTest {
 		
 		Assert.assertEquals(-1, bus.get(bus.get(0)));
 	}
+	
+	@Test
+	public void testToString() {
+		CPU cpu = new DefaultCPU();
+		cpu.setBus(new DefaultBus());
+		System.out.println(cpu);
+	}
 }
