@@ -69,7 +69,7 @@ public class DefaultCPU implements CPU {
 	@Override
 	public String toString() {
 		return "{" + getClass().getSimpleName() +
-				":" + pc +
+				",pc:" + pc +
 				",devices:" + bus + "}";
 	}
 }
